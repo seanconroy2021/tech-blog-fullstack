@@ -16,16 +16,16 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Set up sessions
 const sess = {
     secret: process.env.SESSION_SECRET,
     cookie: {
-        // Stored in milliseconds (86,400,000 === 1 day)
-        //28800000 = 8 hours
-        maxAge: 28800000,
+        maxAge: 28800000, // 8 hours in milliseconds
+        secure: true, // Ensures the cookie is sent over HTTPS
+        httpOnly: true, // Prevents client-side JavaScript from reading the cookie
+        sameSite: 'strict', // Prevents CSRF attacks
     },
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true, // Changed to true to comply with laws and regulations
     store: new SequelizeStore({
         db: sequelize,
     }),
