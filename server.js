@@ -2,7 +2,6 @@
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const session = require("express-session");
-const csurf = require("csurf"); // Import csurf
 const path = require("path");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const sequelize = require("./config/connection");
