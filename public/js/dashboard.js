@@ -1,67 +1,67 @@
-//create post from client to API
+// create post from client to API
 const submitPostHandler = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const title = document.querySelector(".subject-input").value.trim();
-    const content = document.querySelector(".content-input").value.trim();
-    const picture = document.querySelector(".content-picture").value.trim();
-    const author_id = document.querySelector(".logged-in-user-id").innerHTML; //need id of logged in user
-    if (!author_id) {
+  const title = document.querySelector('.subject-input').value.trim();
+  const content = document.querySelector('.content-input').value.trim();
+  const picture = document.querySelector('.content-picture').value.trim();
+  const author_id = document.querySelector('.logged-in-user-id').innerHTML; // need id of logged in user
+  if (!author_id) {
+    alert(
+        'You can\'t post if not logged in. Please logout and in again and then try again.',
+    );
+  } else {
+    if (title && content) {
+      const response = await fetch('/api/post/', {
+        method: 'POST',
+        body: JSON.stringify({title, content, picture, author_id}),
+        headers: {'Content-Type': 'application/json'},
+      });
+      if (response.ok) {
+        document.location.replace('/dashboard');
+      } else {
         alert(
-            "You can't post if not logged in. Please logout and in again and then try again."
-        );
-    } else {
-        if (title && content) {
-            const response = await fetch("/api/post/", {
-                method: "POST",
-                body: JSON.stringify({ title, content, picture, author_id }),
-                headers: { "Content-Type": "application/json" },
-            });
-            if (response.ok) {
-                document.location.replace("/dashboard");
-            } else {
-                alert(
-                    "Failed to submit post. " +
+            'Failed to submit post. ' +
                         response.status +
-                        ": " +
-                        response.statusText
-                );
-            }
-        } else {
-            alert("Please fill out all fields.");
-        }
+                        ': ' +
+                        response.statusText,
+        );
+      }
+    } else {
+      alert('Please fill out all fields.');
     }
+  }
 };
 
-//delete post from client to API
+// delete post from client to API
 const deletePostHandler = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
-    const deletePostId = event.target.getAttribute("data-id");
-    if (deletePostId) {
-        const response = await fetch("/api/post/" + deletePostId, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-        });
-        if (response.ok) {
-            document.location.replace("/dashboard");
-        } else {
-            alert(
-                "Failed to delete post. " +
+  const deletePostId = event.target.getAttribute('data-id');
+  if (deletePostId) {
+    const response = await fetch('/api/post/' + deletePostId, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+    });
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      alert(
+          'Failed to delete post. ' +
                     response.status +
-                    ": " +
-                    response.statusText
-            );
-        }
+                    ': ' +
+                    response.statusText,
+      );
     }
+  }
 };
 
-//add event listeners
+// add event listeners
 document
-    .querySelector(".submit-post")
-    .addEventListener("click", submitPostHandler);
+    .querySelector('.submit-post')
+    .addEventListener('click', submitPostHandler);
 
-const deleteButtons = document.querySelectorAll(".delete-post");
+const deleteButtons = document.querySelectorAll('.delete-post');
 deleteButtons.forEach((el) =>
-    el.addEventListener("click", (event) => deletePostHandler(event))
+  el.addEventListener('click', (event) => deletePostHandler(event)),
 );
