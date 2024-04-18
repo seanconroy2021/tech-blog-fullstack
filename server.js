@@ -2,12 +2,13 @@
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
 const session = require("express-session");
+const csurf = require("csurf"); // Import csurf
 const path = require("path");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const sequelize = require("./config/connection");
 const controllers = require("./controllers");
-// Import the custom helper methods
 const helpers = require("./utils/helpers");
+
 // Incorporate the custom helper methods: ./utils/helpers.js
 const handlebars = expressHandlebars.create({ helpers });
 require("dotenv").config();
