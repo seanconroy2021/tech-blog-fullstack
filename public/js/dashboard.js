@@ -4,6 +4,7 @@ const submitPostHandler = async (event) => {
 
     const title = document.querySelector(".subject-input").value.trim();
     const content = document.querySelector(".content-input").value.trim();
+    const picture = document.querySelector(".content-picture").value.trim();
     const author_id = document.querySelector(".logged-in-user-id").innerHTML; //need id of logged in user
     if (!author_id) {
         alert(
@@ -13,7 +14,7 @@ const submitPostHandler = async (event) => {
         if (title && content) {
             const response = await fetch("/api/post/", {
                 method: "POST",
-                body: JSON.stringify({ title, content, author_id }),
+                body: JSON.stringify({ title, content, picture, author_id }),
                 headers: { "Content-Type": "application/json" },
             });
             if (response.ok) {

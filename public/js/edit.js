@@ -3,6 +3,7 @@ const submitPostHandler = async (event) => {
     event.preventDefault();
 
     const title = document.querySelector(".subject-input").value.trim();
+    const picture = document.querySelector(".content-picture").value.trim();
     const content = document.querySelector(".content-input").value.trim();
     const author_id = document.querySelector(".logged-in-user-id").innerHTML; //need id of logged in user
     const post_id = document.querySelector(".current-post-id").innerHTML;
@@ -16,7 +17,7 @@ const submitPostHandler = async (event) => {
             //'just need to get correct id
             const response = await fetch("/api/post/" + post_id, {
                 method: "PUT",
-                body: JSON.stringify({ title, content, author_id }),
+                body: JSON.stringify({ title, content, picture, author_id }),
                 headers: { "Content-Type": "application/json" },
             });
             if (response.ok) {

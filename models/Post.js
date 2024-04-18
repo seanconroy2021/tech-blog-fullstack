@@ -17,6 +17,10 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        picture: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         content: {
             type: DataTypes.STRING(10000),
             allowNull: false,

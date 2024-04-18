@@ -6,6 +6,7 @@ router.post("/", async (req, res) => {
     try {
         const dbPostData = await Post.create({
             title: req.body.title,
+            picture: req.body.picture,
             content: req.body.content,
             author_id: req.body.author_id,
         });

@@ -4,7 +4,6 @@
             <div class="columns is-centered">
                 <div class="column">
                     <form class="box">
-                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
                         <label class="label is-large" class="label">Create New
                             Blog Post</label>
                         <div class="field">
@@ -14,6 +13,17 @@
                                     type="text"
                                     placeholder="10 Ways Express.js Makes Creating REST API's Easier"
                                     class="input subject-input"
+                                    required
+                                />
+                            </div>
+                        </div>
+                            <div class="field">
+                            <label class="label">Picture</label>
+                            <div class="control">
+                                <input
+                                    type="text"
+                                    placeholder="https://www.example.com/picture.jpg"
+                                    class="input content-picture"
                                     required
                                 />
                             </div>
