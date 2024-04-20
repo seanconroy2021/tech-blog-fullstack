@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Post = require('../models/Post');
 const User = require('../models/User');
-
+const ec2MetadataService = require('../services/Ec2MetadataService');
 // on / (index) page load
 router.get('/', async (req, res) => {
   try {
@@ -36,11 +36,17 @@ router.get('/', async (req, res) => {
         currentPackage = [];
       }
     }
+    // get metadata from ec2 instance
+    const availabilityZone = await ec2MetadataService.fetchMetadata('placement/availability-zone');
+    const instanceId = await ec2MetadataService.fetchMetadata('instance-id');
+    
     // render to page and pass variables for handlebars to work with
     res.render('index', {
       loggedIn: req.session.loggedIn,
       loggedInUserData: req.session.loggedInUserData,
       posts: packagedPosts,
+      availabilityZone: availabilityZone,
+      instanceId: instanceId,
     });
   } catch (err) {
     res.status(500).json(err);
