@@ -26,12 +26,12 @@ npm install
 
 # Creation of .env for secret variables
 # IMPORTANT: In a real-world AWS Secrets Manager would be a more secure approach.
-echo "DB_NAME='blogdb'" > .env
-echo "DB_HOST=''" >> .env
-echo "DB_PORT='3306'" >> .env
-echo "DB_USER='bloguser'" >> .env
-echo "DB_PASSWORD='hidden'" >> .env
-echo "SESSION_SECRET='02d1b8b194123f05bfd15710e2eb37c88aa0690d6f5326cebba4d56388c1'" >> .env
+# echo "DB_NAME='blogdb'" > .env
+# echo "DB_HOST='hidden'" >> .env
+# echo "DB_PORT='3306'" >> .env
+# echo "DB_USER='bloguser'" >> .env
+# echo "DB_PASSWORD='hidden'" >> .env
+# echo "SESSION_SECRET='hidden'" >> .env
 
 # Install PM2 to manage for the  Node.js application
 npm install pm2 -g
